@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost/poetry
+
+wx:
+  appId: wx1df9d97154386c5b
+  appSecret: ae7bb0e243565262f2dfb035ab428044
+  grantType: authorization_code
+  requestUrl: https://api.weixin.qq.com/sns/jscode2session
+
+wxToken:
+  url: https://api.weixin.qq.com/sns/oauth2/access_token
+wxUnionId:
+  url: https://api.weixin.qq.com/sns/userinfo
