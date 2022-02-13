@@ -1,4 +1,4 @@
-package com.example.poetryserver.util;
+package com.example.poetryserver.utils;
 
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;

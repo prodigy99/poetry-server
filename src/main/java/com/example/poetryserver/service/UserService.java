@@ -9,4 +9,6 @@ public interface UserService {
     User register(String uid, String nickName, String avatar);
 
     void updateUser(User user);
+
+    void addUserExp(String uid,int exp);
 }

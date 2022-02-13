@@ -1,5 +1,6 @@
 package com.example.poetryserver.controller;
 
+import com.example.poetryserver.controller.utils.R;
 import com.example.poetryserver.domain.Poetry;
 import com.example.poetryserver.service.PoetryService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ public class PoetryController {
     }
 
     @GetMapping("/findPoetryByTitle/{title}")
-    public Poetry findPoetryByTitle(@PathVariable("title") String title){
-        return poetryService.findPoetryByTitle(title);
+    public R findPoetryByTitle(@PathVariable("title") String title){
+        return new R(poetryService.findPoetryByTitle(title));
     }
 }

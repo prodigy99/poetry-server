@@ -1,8 +1,9 @@
 package com.example.poetryserver.controller;
 
+import com.example.poetryserver.controller.utils.R;
 import com.example.poetryserver.domain.User;
 import com.example.poetryserver.service.UserService;
-import com.example.poetryserver.util.WxHelper;
+import com.example.poetryserver.utils.WxHelper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -18,20 +19,24 @@ public class UserController {
     }
 
     @GetMapping("getWxOpenId/{uid}")
-    private Map<String, Object> getWxOpenId(@PathVariable("uid") String uid){
-        return wxHelper.getOpenIdByCode(uid);
+    private R getWxOpenId(@PathVariable("uid") String uid){
+        return new R(wxHelper.getOpenIdByCode(uid));
     }
 
     @GetMapping("getUserInfo/{uid}")
-    private User getUserInfo(@PathVariable String uid){
-        return userService.findUserById(uid);
+    private R getUserInfo(@PathVariable String uid){
+
+        return new R(userService.findUserById(uid));
     }
 
-    @GetMapping("register/{uid}/{nickName}/{avatar}")
-    private User register(@PathVariable String uid,@PathVariable("nickName") String nickname,@PathVariable("avatar") String avatar){
-        // TODO: 2022/2/12 进行注册验证 
-        if(userService.findUserById(uid) != null) return userService.findUserById(uid);
-        return userService.register(uid,nickname,avatar);
+    @PostMapping("register")
+    private R register(@RequestBody Map<String,Object> userInfo){
+        String uid = (String) userInfo.get("uid");
+        String nickname = (String) userInfo.get("nickname");
+        String avatar = (String) userInfo.get("avatar");
+        // TODO: 2022/2/12 进行注册验证
+        if(userService.findUserById(uid) != null) return new R(R.STATUS.error,"注册失败,用户已存在");
+        return new R(userService.register(uid,nickname,avatar));
     }
 
     @GetMapping("addUserExp/{uid}/{num}")

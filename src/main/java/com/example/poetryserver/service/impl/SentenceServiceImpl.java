@@ -1,6 +1,6 @@
 package com.example.poetryserver.service.impl;
 
-import com.example.poetryserver.util.DbHelper;
+import com.example.poetryserver.utils.DbHelper;
 import com.example.poetryserver.dao.SentenceDao;
 import com.example.poetryserver.domain.Sentence;
 import com.example.poetryserver.service.SentenceService;

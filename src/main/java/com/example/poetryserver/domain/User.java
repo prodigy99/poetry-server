@@ -1,6 +1,6 @@
 package com.example.poetryserver.domain;
 
-import com.example.poetryserver.util.UserHelper;
+import com.example.poetryserver.utils.UserHelper;
 import lombok.AllArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,13 +10,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
     @Id
     private String uid;
-    private String nickName;//用户名
+    private String nickname;//用户名
     private String avatar;
     private int level;
     private int gold;
     private int diamond;
     private int exp;
     private double nextRankPercent; // 经验距离升级的百分比
+//    private String rank; // 段位
 
     public String getUid() {
         return uid;
@@ -75,12 +76,12 @@ public class User {
         }
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickName) {
+        this.nickname = nickName;
     }
 
     public String getAvatar() {

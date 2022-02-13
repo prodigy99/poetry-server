@@ -11,7 +11,7 @@ import java.math.BigInteger;
 @Document(collection="sentence")
 public class Sentence implements Serializable {
     @Id
-    private BigInteger id;
+    private String id;
     private String name;
     private String from;
 

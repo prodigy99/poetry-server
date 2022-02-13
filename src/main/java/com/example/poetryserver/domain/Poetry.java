@@ -13,10 +13,11 @@ import java.util.List;
 @Document(collection = "guwen")
 public class Poetry implements Serializable {
     @Id
-    private BigInteger id;
+    private String id;
     private String title;
     private String dynasty;
     private String writer;
+    private String content;
     private List<String> type;
     private String remark;
     @Field("shangxi")

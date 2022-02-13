@@ -1,4 +1,4 @@
-package com.example.poetryserver.util;
+package com.example.poetryserver.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;

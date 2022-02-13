@@ -30,4 +30,11 @@ public class UserServiceImpl implements UserService {
         userDao.updateUser(user);
     }
 
+    @Override
+    public void addUserExp(String uid, int exp) {
+        User user = this.findUserById(uid);
+        user.setExp(user.getExp() + exp);
+        this.updateUser(user);
+    }
+
 }

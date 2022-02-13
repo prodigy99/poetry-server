@@ -3,6 +3,11 @@ spring:
     mongodb:
       uri: mongodb://localhost/poetry
 
+app:
+  config:
+    #  基础经验
+    baseExp: 5
+
 wx:
   appId: wx1df9d97154386c5b
   appSecret: ae7bb0e243565262f2dfb035ab428044

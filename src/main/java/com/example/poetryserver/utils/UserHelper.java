@@ -1,4 +1,4 @@
-package com.example.poetryserver.util;
+package com.example.poetryserver.utils;
 
 
 public class UserHelper {

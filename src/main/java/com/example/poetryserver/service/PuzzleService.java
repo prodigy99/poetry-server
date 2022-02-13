@@ -1,10 +1,14 @@
 package com.example.poetryserver.service;
 
-import com.example.poetryserver.pojo.puzzle.CrosswordPuzzles;
-import com.example.poetryserver.pojo.puzzle.SingleTopicSelectionPuzzle;
+import com.example.poetryserver.dto.CrosswordPuzzleDTO;
+import com.example.poetryserver.pojo.SingleTopicSelectionPuzzle;
 
 public interface PuzzleService {
+    boolean checkKey(String pid, String key, boolean remove);
+
+    // 根据pid获得puzzle
+    boolean checkKey(String pid, String key);
     SingleTopicSelectionPuzzle getTitleWriterPuzzle();
     SingleTopicSelectionPuzzle getTitleSentenceQuestion();
-    CrosswordPuzzles getCrosswordPuzzles(int num);
+    CrosswordPuzzleDTO getCrosswordPuzzles(int num);
 }
