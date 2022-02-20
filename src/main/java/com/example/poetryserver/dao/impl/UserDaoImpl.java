@@ -5,7 +5,6 @@ import com.example.poetryserver.domain.User;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -31,4 +30,7 @@ public class UserDaoImpl implements UserDao {
         // 更新User
         mongoTemplate.save(user);
     }
+
+
+
 }

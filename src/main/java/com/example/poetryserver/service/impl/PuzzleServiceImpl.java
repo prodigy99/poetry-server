@@ -9,13 +9,12 @@ import com.example.poetryserver.domain.Sentence;
 import com.example.poetryserver.domain.Writer;
 import com.example.poetryserver.dto.CrosswordPuzzleDTO;
 import com.example.poetryserver.service.PuzzleService;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 @Service
 public class PuzzleServiceImpl implements PuzzleService {
@@ -41,11 +40,16 @@ public class PuzzleServiceImpl implements PuzzleService {
         redisTemplate.opsForValue().set(pid, singleTopicSelectionPuzzle,24, TimeUnit.HOURS);
     }
 
+    @Override
+    public void removePuzzle(String pid){
+        redisTemplate.delete(pid);
+    }
+
     // 根据pid获得puzzle
     private SingleTopicSelectionPuzzle getPuzzle(String pid, boolean remove) {
         if(redisTemplate.hasKey(pid)){
             SingleTopicSelectionPuzzle singleTopicSelectionPuzzle = (SingleTopicSelectionPuzzle) redisTemplate.opsForValue().get(pid);
-            if (remove == true)  redisTemplate.delete(pid);
+            if (remove == true)  removePuzzle(pid);
             return singleTopicSelectionPuzzle;
         }else return null;
     }
@@ -62,7 +66,7 @@ public class PuzzleServiceImpl implements PuzzleService {
         return this.checkKey(pid,key,true);
     }
 
-    //    得到作者-诗词名类型的题目
+    // 得到作者-诗词名类型的题目
     @Override
     public SingleTopicSelectionPuzzle getTitleWriterPuzzle() {
         Random rand = new Random();
@@ -124,6 +128,14 @@ public class PuzzleServiceImpl implements PuzzleService {
             savePuzzle(pid, singleTopicSelectionPuzzle);
             return singleTopicSelectionPuzzle;
         }
+    }
+
+    @Override
+    public SingleTopicSelectionPuzzle getSingleTopicSelectionPuzzle() { // 获取题目
+        Random rand = new Random();
+        ArrayList<Supplier<SingleTopicSelectionPuzzle>> suppliers = new ArrayList<>(Arrays.asList(this::getTitleWriterPuzzle, this::getTitleSentenceQuestion));
+        int index = rand.nextInt(suppliers.size());
+        return suppliers.get(index).get();
     }
 
     //获得填词类型的游戏

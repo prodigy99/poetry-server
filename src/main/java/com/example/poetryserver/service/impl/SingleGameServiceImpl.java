@@ -7,11 +7,6 @@ import com.example.poetryserver.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.function.Supplier;
-
 // 单人游戏
 @Service
 public class SingleGameServiceImpl implements SingleGameService {
@@ -27,10 +22,7 @@ public class SingleGameServiceImpl implements SingleGameService {
 
     @Override
     public SingleTopicSelectionPuzzle getPuzzle() { // 获取题目
-        Random rand = new Random();
-        ArrayList<Supplier<SingleTopicSelectionPuzzle>> suppliers = new ArrayList<>(Arrays.asList(puzzleService::getTitleWriterPuzzle, puzzleService::getTitleSentenceQuestion));
-        int index = rand.nextInt(suppliers.size());
-        return suppliers.get(index).get();
+        return puzzleService.getSingleTopicSelectionPuzzle();
     }
 
     @Override
